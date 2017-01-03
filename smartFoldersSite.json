@@ -1,0 +1,322 @@
+{
+	"name" : "Virtual Folders for Sites",
+	"nodes" : [{
+			"id" : "1",
+			"name" : "Mis filtros de sitio",
+			"description" : "Filtros Smart para el sitio",
+			"nodes" : [
+
+			 
+			    {
+					"id" : "11",
+					"name" : "Archivos Recientes",
+					"description" : "Archivos en los ultimos 7 dias",
+
+					"nodes" : [{
+							"id" : "111",
+							"name" : "Ficheros creados por mi recientemente",
+							"description" : "Ficheros que he creado recientemente",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND TYPE:'cm:content' AND =cm:creator:%CURRENT_USER% AND +cm:created:[NOW/DAY-7DAYS TO NOW/DAY+1DAY]"
+							}
+
+						},{
+							"id" : "112",
+							"name" : "Ficheros modificados por mi recientemente",
+							"description" : "Ficheros que he modificado recientemente",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND TYPE:'cm:content' AND =cm:modifier:%CURRENT_USER% AND +cm:modified:[NOW/DAY-7DAYS TO NOW/DAY+1DAY]"
+							}
+
+						},{
+							"id" : "113",
+							"name" : "Modificaciones a mis ficheros creados",
+							"description" : "Modificaciones a mis ficheros creados",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND TYPE:'cm:content' AND =cm:creator:%CURRENT_USER% AND +cm:modified:[NOW/DAY-7DAYS TO NOW/DAY+1DAY]"
+							}
+						}
+					]
+				},{
+					"id" : "12",
+					"name" : "Contenido del sitio",
+					"description" : "Ficheros del sitio por mimetype",
+					"nodes" : [{
+							"id" : "121",
+							"name" : "Documentos por tipo mime",
+							"description" : "Mis documentos por mimetype",
+							"nodes" : [{
+									"id" : "1211",
+									"name" : "Office Documents",
+									"search" : {
+										"language" : "fts-alfresco",
+										"query" : "(PATH:'%ACTUAL_PATH%//*') AND (=cm:content.mimetype:application/ms* OR =cm:content.mimetype:application/vnd.ms* OR =cm:content.mimetype:application/vnd.openxmlformats*) AND (=cm:modifier:%CURRENT_USER% OR =cm:creator:%CURRENT_USER%)"
+									}
+								}, {
+									"id" : "1212",
+									"name" : "PDF",
+									"search" : {
+										"language" : "fts-alfresco",
+										"query" : "(PATH:'%ACTUAL_PATH%//*') AND =cm:content.mimetype:application/pdf AND (=cm:modifier:%CURRENT_USER% OR =cm:creator:%CURRENT_USER%)"
+									}
+								}, {
+									"id" : "1213",
+									"name" : "Otros",
+									"search" : {
+										"language" : "fts-alfresco",
+										"query" : "(PATH:'%ACTUAL_PATH%//*') AND =cm:content.mimetype:application/* AND NOT (=cm:content.mimetype:application/ms* OR =cm:content.mimetype:application/vnd.ms* OR =cm:content.mimetype:application/vnd.openxmlformats* OR =cm:content.mimetype:application/pdf) AND (=cm:modifier:%CURRENT_USER% OR =cm:creator:%CURRENT_USER%)"
+									}
+								}, {
+									"id" : "1214",
+									"name" : "Imagenes",
+									"search" : {
+										"language" : "fts-alfresco",
+										"query" : "(PATH:'%ACTUAL_PATH%//*') AND =cm:content.mimetype:image/* AND (=cm:modifier:%CURRENT_USER% OR =cm:creator:%CURRENT_USER%)"
+									}
+								}, {
+									"id" : "1215",
+									"name" : "Audio",
+									"search" : {
+										"language" : "fts-alfresco",
+										"query" : "(PATH:'%ACTUAL_PATH%//*') AND =cm:content.mimetype:audio/* AND (=cm:modifier:%CURRENT_USER% OR =cm:creator:%CURRENT_USER%)"
+									}
+								}, {
+									"id" : "1216",
+									"name" : "Video",
+									"search" : {
+										"language" : "fts-alfresco",
+										"query" : "(PATH:'%ACTUAL_PATH%//*') AND =cm:content.mimetype:video/* AND (=cm:modifier:%CURRENT_USER% OR =cm:creator:%CURRENT_USER%)"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"id" : "14",
+					"name" : "Estado de documento",
+					"description" : "Archivos con el aspecto zpm:statusable",
+
+					"nodes" : [{
+							"id" : "141",
+							"name" : "Pendiente de validar",
+							"description" : "Documentos con estado pendiente de validar",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'zpm:statusable' AND zpm:mystatus:'zpm.estado.pendiente'"
+							}
+
+						},{
+							"id" : "142",
+							"name" : "Borrador",
+							"description" : "Documentos con estado borrador",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'zpm:statusable' AND zpm:mystatus:'zpm.estado.borrador'"
+							}
+
+						},{
+							"id" : "143",
+							"name" : "Definitivo",
+							"description" : "Documentos con estado definitivo",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'zpm:statusable' AND zpm:mystatus:'zpm.estado.definitivo'"
+							}
+						},{
+							"id" : "144",
+							"name" : "Cancelado",
+							"description" : "Documentos con estado cancelado",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'zpm:statusable' AND zpm:mystatus:'zpm.estado.cancelado'"
+							}
+						},{
+							"id" : "145",
+							"name" : "Todos los estados",
+							"description" : "Documentos con estado rechazado",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'zpm:statusable'"
+							}
+						}
+
+					]
+				},
+
+				{
+					"id" : "15",
+					"name" : "Mis ofertas",
+					"description" : "Mis ofertas",
+
+					"nodes" : [
+						{
+							"id" : "151",
+							"name" : "Proyectos para 2016",
+							"description" : "Proyectos para 2016",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'zpr:projectable' AND @zpr:project_year:'2016'"
+							}
+						},{
+							"id" : "152",
+							"name" : "Proyectos para Q4 de 2016",
+							"description" : "Proyectos para Q4 de 2016",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'zpr:projectable' AND @zpr:project_year:'2016' AND @zpr:project_quarter:'Q4'"
+							}
+						},
+						{
+							"id" : "153",
+							"name" : "Alfresco SLA",
+							"description" : "Ofertas de proyectos SLA de Alfresco",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'zpr:projectable' AND TAG:'alfresco' AND TAG:'sla'"
+							}
+						},{
+							"id" : "154",
+							"name" : "Alfresco formacion",
+							"description" : "Ofertas de formacion con Alfresco",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'zpr:projectable' AND TAG:'alfresco' AND TAG:'formacion'"
+							}
+						}
+					]
+				},
+
+				{
+					"id" : "16",
+					"name" : "Compartidos - Publicados",
+					"description" : "Archivos con el aspecto qshare:shared",
+
+					"nodes" : [{
+							"id" : "161",
+							"name" : "Documentos compartidos publicos",
+							"description" : "Documentos compartidos (publicados)",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'qshare:shared'"
+							}
+
+						},{
+							"id" : "162",
+							"name" : "Documentos compartidos por ccl001",
+							"description" : "Documentos compartidos y publicados por ccl001",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'qshare:shared' AND @qshare:sharedBy:ccl001"
+							}
+						},{
+							"id" : "163",
+							"name" : "Documentos compartidos con vigencia",
+							"description" : "Documentos compartidos y publicados con vigencia",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'qshare:shared' AND ASPECT:'cm:effectivity'"
+							}
+						},{
+							"id" : "164",
+							"name" : "Despues de 2016",
+							"description" : "Documentos compartidos en 2016",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'qshare:shared' AND @cm:modified:['2016-01-01' TO NOW]"
+							}
+						},{
+							"id" : "165",
+							"name" : "Antes de 2016",
+							"description" : "Documentos compartidos antes de 2016",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'qshare:shared' AND @cm:modified:[MIN TO '2016-01-01']"
+							}
+						}
+
+
+					]
+				},
+				
+				{
+					"id" : "17",
+					"name" : "Mis etiquetas",
+					"description" : "Mis etiquetas",
+
+					"nodes" : [{
+							"id" : "171",
+							"name" : "todo",
+							"description" : "todo",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND TAG:'todo'"
+							}
+
+						},{
+							"id" : "172",
+							"name" : "tocheck",
+							"description" : "tocheck",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND TAG:'tocheck'"
+							}
+						},{
+							"id" : "173",
+							"name" : "working",
+							"description" : "working",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND TAG:'working'"
+							}
+						},{
+							"id" : "174",
+							"name" : "tosign",
+							"description" : "tosign",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND TAG:'tosign'"
+							}
+						},{
+							"id" : "175",
+							"name" : "signed",
+							"description" : "signed",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND TAG:'signed'"
+							}
+						},{
+							"id" : "176",
+							"name" : "todownload",
+							"description" : "todownload",
+							"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND TAG:'todownload'"
+							}
+						}
+
+
+
+					]
+				},{
+					"id" : "18",
+					"name" : "URL cortas",
+					"description" : "URL cortas",
+					"search" : {
+								"language" : "fts-alfresco",
+								"query" : "(PATH:'%ACTUAL_PATH%//*') AND ASPECT:'dw:shortable'"
+					}					
+				}
+
+
+
+
+
+			]
+		}
+	]
+}
+
